@@ -7,9 +7,8 @@ function Result({ results }) {
   return (
     // 5 set up return statement
     <ScrollView>
-      {" "}
       {/* 6 Create Scrollview element to display results for Lap/Reset button*/}
-      <View style={styles.resultItem} />{" "}
+      <View style={styles.resultItem} />
       {/* 8 create new View to first display - self closing tag*/}
       {results.map(
         (
@@ -20,7 +19,7 @@ function Result({ results }) {
             {/* 10 The View to render which will depend on the results array. includes key and style*/}
             <Text style={styles.resultItemText}>
               {/* 11 */}
-              Lap {results.length - index}{" "}
+              Lap {results.length - index}
               {/* 12 The text 'Lap' + the # count of laps in results*/}
             </Text>
             <Text style={styles.resultItemText}>

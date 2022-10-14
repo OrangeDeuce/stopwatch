@@ -10,7 +10,7 @@ export const displayTime = (centiseconds) => {
     centiseconds = 0;
   }
 
-  if (centiseconds > 0) {
+  if (centiseconds < 100) {
     // To return centiseconds as output in a string after passing into padToTwo
     return `00:00:${padToTwo(centiseconds)}`;
   }
@@ -20,11 +20,13 @@ export const displayTime = (centiseconds) => {
   seconds = (centiseconds - remainingCentiseconds) / 100;
 
   if (seconds < 60) {
-    return `00:${padToTwo(seconds)}:${padToTwo(centiseconds)}`;
+    return `00:${padToTwo(seconds)}:${padToTwo(remainingCentiseconds)}`;
   }
 
   let remainingSeconds = seconds % 60;
   minutes = (seconds - remainingSeconds) / 60;
 
-  return `${padToTwo(minutes)}:${padToTwo(seconds)}:${padToTwo(centiseconds)}`;
+  return `${padToTwo(minutes)}:${padToTwo(remainingSeconds)}:${padToTwo(
+    remainingCentiseconds
+  )}`;
 };

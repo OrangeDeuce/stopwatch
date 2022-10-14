@@ -11,7 +11,7 @@ function Control({ isRunning, handleLeftButtonPress, handleRightButtonPress }) {
         style={[
           // 6 style to use plus a specific style override - for the border!
           styles.controlButtonBorder, // Note: still need to create this stylesheet down below!
-          { backgroundColor: isRunning ? "#333333" : "#1c1c1e" }, // 7 will apply 2 conditional background button colors
+          { backgroundColor: isRunning ? "blue" : "#1c1c1e" }, // 7 will apply 2 conditional background button colors
         ]}
         onPress={handleLeftButtonPress} // 8 to pass handler to use in onPress
       >
@@ -29,15 +29,15 @@ function Control({ isRunning, handleLeftButtonPress, handleRightButtonPress }) {
         style={[
           // 12 add styling to the border again
           styles.controlButtonBorder, //again this will be an a reference for style + an override for conditional background color
-          { backgroundColor: isRunning ? "340e0d" : "0a2a12" },
+          { backgroundColor: isRunning ? "red" : "#0a2a12" },
         ]}
         onPress={handleRightButtonPress} // 13 to use handleRightButtonPress handler for onPress
       >
         <View style={styles.controlButton}>
           {/* 14 add a View  inside to style the button*/}
-          <Text style={{ color: isRunning ? "#ea4c49" : "#37d05c" }}>
+          <Text style={{ color: isRunning ? "#fafafa" : "#37d05c" }}>
             {/* 15 to add conditional style to Text color*/}
-            {isRunning ? "Stop" : "Start"}{" "}
+            {isRunning ? "Stop" : "Start"}
             {/* 16 to now add conditional button text labels*/}
           </Text>
         </View>
