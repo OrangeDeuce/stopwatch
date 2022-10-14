@@ -38,9 +38,17 @@ export default function Stopwatch() {
         const interval = setInterval(() => {
           // 20 create a setInterval which runs the callback inside every 10 milliseconds (Called immediately! Will now start since button activated!)
           setTime((previousTime) => previousTime + 1); // 21 To setTime to the value of 'previous time' + 1 (using previous state for new state!)
+          setTimeout(() => {
+            // NEW FEATURE ADD: To shut down setInterval after reaching max limit 60 minutes, to display time back to 00:00:00 and to refresh buttons
+            clearInterval(interval);
+            //setTime(0);
+            setRunning(false);
+            //setRunning((previousState) => !previousState);
+          }, 3600000);
+          //NEW LINES HERE
         }, 10); // this setInterval also has an 'id' returned that we can use to clear the interval
 
-        timer.current = interval; //timer.current refers the to current value set using useRef(null), so now timer.current's value is now
+        timer.current = interval; // 21a timer.current refers the to current value set using useRef(null), so now timer.current's value is now
         // recognized as 'interval'!  timer.current represents an INITIAL VALUE, but here it is re-assigned to the 'id' named 'interval'.
         // This will be used to clear the interval
       } else {
@@ -55,17 +63,18 @@ export default function Stopwatch() {
   );
 
   return (
-    // 26 create return statement for JSX
+    // 26 create return statement for JSX*
     <SafeAreaView style={styles.container}>
       {/* 27 create a SafeAreaView with styles.container*/}
-      <MyHeader /> {/* 28 Insert MyHeader in this position*/}
-      <StatusBar style="light" />{" "}
+      <MyHeader />
+      {/* 28 Insert MyHeader in this position*/}
+      <StatusBar style="light" />
       {/* 29 Insert StatusBar in this position with an inline style */}
       <View style={styles.display}>
         {/* 30 Insert View box with 'display' styling */}
         <Text style={styles.displayText}>
           {/* 31 To display the TIME as TEXT! Using 'displayText' styling */}
-          {displayTime(time)}{" "}
+          {displayTime(time)}
           {/*To read current 'time' state, run through displayTime and display value here*/}
         </Text>
       </View>
@@ -79,7 +88,7 @@ export default function Stopwatch() {
       </View>
       <View style={styles.result}>
         {/* 37 Insert next View box for Results component. Use 'result' styling. Takes 1 prop 'results' */}
-        <Result results={results} />{" "}
+        <Result results={results} />
         {/* 38 Insert Result component here and pass in 'results' prop */}
       </View>
     </SafeAreaView>
@@ -96,14 +105,14 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "darkgrey",
     paddingTop: Constants.statusBarHeight,
   },
   displayText: {
     color: "#fff",
     fontSize: 70,
     fontWeight: "200",
-    fontFamily: Platform.OS === "ios" ? "Helvetic Neue" : null,
+    fontFamily: Platform.OS === "ios" ? "Helvetica Neue" : null,
   },
   control: {
     height: 70,
