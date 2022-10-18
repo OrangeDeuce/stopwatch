@@ -1,5 +1,12 @@
 import React, { useState, useRef, useCallback } from "react"; // 1
-import { StyleSheet, SafeAreaView, View, Text, Platform } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  Text,
+  Platform,
+  Switch,
+} from "react-native";
 import { StatusBar } from "expo-status-bar"; // 3
 import Constants from "expo-constants"; // 4
 import Result from "./Result"; // 5
@@ -14,6 +21,9 @@ export default function Stopwatch() {
   const [isRunning, setRunning] = useState(false); // 11 create new useState state named 'isRunning', a boolean, set to 'false'
   const [results, setResults] = useState([]); // 12 create new useState 'results' which will be an array and set intially to empty array
   const timer = useRef(null); // 13 Can set some variable to a value that CAN change and NOT cause a re-render
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   const handleLeftButtonPress = useCallback(
     () => {
@@ -38,15 +48,19 @@ export default function Stopwatch() {
         const interval = setInterval(() => {
           // 20 create a setInterval which runs the callback inside every 10 milliseconds (Called immediately! Will now start since button activated!)
           setTime((previousTime) => previousTime + 1); // 21 To setTime to the value of 'previous time' + 1 (using previous state for new state!)
-          setTimeout(() => {
-            // NEW FEATURE ADD: To shut down setInterval after reaching max limit 60 minutes, to display time back to 00:00:00 and to refresh buttons
-            clearInterval(interval);
-            //setTime(0);
-            setRunning(false);
-            //setRunning((previousState) => !previousState);
-          }, 3600000);
-          //NEW LINES HERE
         }, 10); // this setInterval also has an 'id' returned that we can use to clear the interval
+
+        // //NEW LINES HERE
+        function shutDown() {
+          clearInterval(interval);
+          setRunning(false);
+          //setTime(0);
+          console.log("setTimeout activated for shutdown at 4000!");
+        }
+
+        if (isEnabled) {
+          setTimeout(shutDown, 4000);
+        }
 
         timer.current = interval; // 21a timer.current refers the to current value set using useRef(null), so now timer.current's value is now
         // recognized as 'interval'!  timer.current represents an INITIAL VALUE, but here it is re-assigned to the 'id' named 'interval'.
@@ -59,7 +73,7 @@ export default function Stopwatch() {
 
       setRunning((previousState) => !previousState); // 23 To change state of isRunning to the OPPOSITE of what is already there.
     },
-    [isRunning] // 24 Note: handleRightButtonPress's callBack() will only execute whenever [isRunning] changes!
+    [isRunning, isEnabled] // 24 Note: handleRightButtonPress's callBack() will only execute whenever [isRunning] changes!
   );
 
   return (
@@ -68,10 +82,14 @@ export default function Stopwatch() {
       {/* 27 create a SafeAreaView with styles.container*/}
       <MyHeader />
       {/* 28 Insert MyHeader in this position*/}
+      <Text>Set max 60 min.</Text>
+      <Switch onValueChange={toggleSwitch} value={isEnabled} />
+      {/*ADD NEW FEATURE*/}
       <StatusBar style="light" />
       {/* 29 Insert StatusBar in this position with an inline style */}
       <View style={styles.display}>
         {/* 30 Insert View box with 'display' styling */}
+        {isEnabled ? <Text>Shutdown Activated [60 min]</Text> : null}
         <Text style={styles.displayText}>
           {/* 31 To display the TIME as TEXT! Using 'displayText' styling */}
           {displayTime(time)}
