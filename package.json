@@ -6,8 +6,9 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
-  },
+    "web": "expo start --web",
+    "test": "mocha"
+  }, 
   "dependencies": {
     "expo": "~46.0.13",
     "expo-constants": "~13.2.4",
@@ -17,7 +18,8 @@
     "react-native-paper": "^4.12.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "mocha": "^10.1.0"
   },
   "private": true
 }
