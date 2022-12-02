@@ -1,6 +1,9 @@
 ## Stopwatch App (Work in Progress)
 ![image](https://user-images.githubusercontent.com/40747156/205188194-6faf80fb-049b-4358-a22e-957861f4a53d.png) ![image](https://user-images.githubusercontent.com/40747156/205188362-70805277-14b9-4856-b722-63b4a389543a.png)
 
+![stopwatchScreenshot](https://user-images.githubusercontent.com/40747156/205323872-b2b49766-30f3-4113-b744-fc9c5aa26b3a.jpg)
+
+
 ### Adapted partially from [Bug Ninza](https://www.youtube.com/watch?v=xIf9KeakswM) but includes my own modifications of existing features + inclusion of various additional features:
 - [x] Add Switch
 - [x] Add alert text to appear when Switch toggled to 'on'
