@@ -82,14 +82,20 @@ export default function Stopwatch() {
       {/* 27 create a SafeAreaView with styles.container*/}
       <MyHeader />
       {/* 28 Insert MyHeader in this position*/}
-      <Text>Set max 60 min.</Text>
-      <Switch onValueChange={toggleSwitch} value={isEnabled} />
+      <Text style={styles.shutdownText}>Set max 60 min.</Text>
+      <Switch
+        style={styles.switch}
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
       {/*ADD NEW FEATURE*/}
       <StatusBar style="light" />
       {/* 29 Insert StatusBar in this position with an inline style */}
       <View style={styles.display}>
         {/* 30 Insert View box with 'display' styling */}
-        {isEnabled ? <Text>Shutdown Activated [60 min]</Text> : null}
+        {isEnabled ? (
+          <Text style={{ color: "white" }}>Shutdown Activated (60 min)</Text>
+        ) : null}
         <Text style={styles.displayText}>
           {/* 31 To display the TIME as TEXT! Using 'displayText' styling */}
           {displayTime(time)}
@@ -123,7 +129,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "darkgrey",
+    backgroundColor: "black",
     paddingTop: Constants.statusBarHeight,
   },
   displayText: {
@@ -139,5 +145,13 @@ const styles = StyleSheet.create({
   },
   result: {
     flex: 2 / 5,
+  },
+
+  shutdownText: {
+    textAlign: "center",
+    color: "white",
+  },
+  switch: {
+    alignSelf: "center",
   },
 });

@@ -5,10 +5,10 @@ import { Appbar } from "react-native-paper";
 
 const MyHeader = () => {
   return (
-    <Appbar.Header style={{ backgroundColor: "green" }}>
+    <Appbar.Header style={{ backgroundColor: "orange" }}>
       <Appbar.Content
-        title="This cool ass Stopwatch!"
-        style={{ alignItems: "center" }}
+        title="A Stopwatch!"
+        style={{ alignItems: "center", fontStyle: "bold" }}
       />
     </Appbar.Header>
   );
